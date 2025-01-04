@@ -296,6 +296,17 @@
           tabelaPorcentagens[index].children[1].innerText = diasCalculados;
         });
       });
+      document.querySelectorAll("table tbody tr").forEach(row => {
+        // Quando o mouse passar por cima da linha
+        row.addEventListener("mouseover", () => {
+          row.classList.add("table-active"); // Classe Bootstrap para destacar a linha
+        });
+
+        // Quando o mouse sair da linha
+        row.addEventListener("mouseout", () => {
+          row.classList.remove("table-active");
+        });
+      });
 
     </script>
 
