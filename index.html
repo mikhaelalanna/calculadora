@@ -13,7 +13,7 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="assets/ml-logo-white.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-          <span class="d-none d-md-inline d-lg-inline">Mikhaela Lanna |</span>
+          <span class="d-none d-md-inline d-lg-inline">Mikhaela Lanna &#124;</span>
           <span>Calculadora de Execução Penal</span>
         </a>
       </div>
@@ -59,18 +59,126 @@
 
         </div>
         <!-- Coluna 2: 60% -->
-        <div class="col-12 col-md-7 bg-light border p-3">
-          <p>Conteúdo da primeira coluna (60%).</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 bg-light border p-3"  style="min-height: 300px;">
-          <p>Conteúdo da segunda linha (100%).</p>
-        </div>
-      </div>
-    </div>
+        <div class="col-12 col-md-7 border p-3">
+          <h3>Frações e Porcentagem</h3>
 
-    <!-- footer -->
+          <div class="d-flex align-items-center mb-3">
+            <input type="number" class="form-control me-2" id="diasFP" placeholder="Dias" min="0">
+            <button class="btn btn-dark" id="calcularFPBtn">Calcular</button>
+          </div>
+
+          <!-- Tabelas lado a lado -->
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <table id="tfr" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Fração</th>
+                    <th scope="col">Número de Dias</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1/6</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1/5</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1/4</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1/3</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>3/8</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>2/5</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>5/12</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>11/24</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>1/2</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>3/5</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>2/3</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 col-md-6">
+              <table id="tpc" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Porcentagem</th>
+                    <th scope="col">Número de Dias</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>16%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>20%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>25%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>30%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>40%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>50%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>60%</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>70%</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> <!-- fecha row -->
+
+      <div class="row bg-light" style="min-height: 120px">
+        EM CONSTRUÇÃO
+      </div>
+
+    </div> <!-- fecha content -->
+
     <footer class="bg-dark text-white text-center p-3 mt-5 footer">
       <p>&copy; 2025 Mikhaela Lanna. Todos os direitos reservados.</p>
     </footer>
@@ -100,47 +208,95 @@
       });
 
 
-    // Função para calcular a conversão para anos, meses e dias por extenso
-    document.getElementById('calcularAnoBtn').addEventListener('click', function() {
-      const diasEntrada = parseInt(document.getElementById('diasParaAno').value) || 0;
+      // Função para calcular a conversão para anos, meses e dias por extenso
+      document.getElementById('calcularAnoBtn').addEventListener('click', function() {
+        const diasEntrada = parseInt(document.getElementById('diasParaAno').value) || 0;
 
-      if (diasEntrada < 0) {
-        // Exibir mensagem de erro
-        document.getElementById('resultadoAno').innerText = 'Por favor, informe um valor válido.';
-        return;
-      }
+        if (diasEntrada < 0) {
+          // Exibir mensagem de erro
+          document.getElementById('resultadoAno').innerText = 'Por favor, informe um valor válido.';
+          return;
+        }
 
-      // Calcular anos, meses e dias
-      const anos = Math.floor(diasEntrada / 365); // Quantos anos completos
-      const diasRestantes = diasEntrada % 365; // Resto de dias após remover os anos completos
-      const meses = Math.floor(diasRestantes / 30); // Quantos meses completos
-      const dias = diasRestantes % 30; // Restante de dias após remover os meses completos
+        // Calcular anos, meses e dias
+        const anos = Math.floor(diasEntrada / 365); // Quantos anos completos
+        const diasRestantes = diasEntrada % 365; // Resto de dias após remover os anos completos
+        const meses = Math.floor(diasRestantes / 30); // Quantos meses completos
+        const dias = diasRestantes % 30; // Restante de dias após remover os meses completos
 
-      // Montar a string de resultado por extenso
-      let resultadoTexto = "";
+        // Montar a string de resultado por extenso
+        let resultadoTexto = "";
 
-      if (anos > 0) {
-        resultadoTexto += `${anos} ano${anos > 1 ? 's' : ''}`;
-      }
+        if (anos > 0) {
+          resultadoTexto += `${anos} ano${anos > 1 ? 's' : ''}`;
+          }
 
-      if (meses > 0) {
-        if (resultadoTexto) resultadoTexto += ", ";
-        resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
-      }
+          if (meses > 0) {
+            if (resultadoTexto) resultadoTexto += ", ";
+            resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
+            }
 
-      if (dias > 0) {
-        if (resultadoTexto) resultadoTexto += " e ";
-        resultadoTexto += `${dias} dia${dias > 1 ? 's' : ''}`;
-      }
+            if (dias > 0) {
+              if (resultadoTexto) resultadoTexto += " e ";
+              resultadoTexto += `${dias} dia${dias > 1 ? 's' : ''}`;
+              }
 
-      // Caso não haja anos, meses ou dias
-      if (resultadoTexto === "") {
-        resultadoTexto = "0 dias";
-      }
+              // Caso não haja anos, meses ou dias
+              if (resultadoTexto === "") {
+                resultadoTexto = "0 dias";
+              }
 
-      // Exibir o resultado por extenso
-      document.getElementById('resultadoAno').innerText = `Isto equivale a ${resultadoTexto}.`;
-    });
+              // Exibir o resultado por extenso
+              document.getElementById('resultadoAno').innerText = `Isto equivale a ${resultadoTexto}.`;
+            });
+
+
+
+      document.getElementById("calcularFPBtn").addEventListener("click", function () {
+        // Obter o valor do input
+        const dias = parseFloat(document.getElementById("diasFP").value);
+
+        // Se o valor for negativo ou não for número válido, não faz nada
+        if (isNaN(dias) || dias < 0) {
+          return;
+        }
+
+        // Tabela de frações e seus denominadores
+        const fracoes = [
+          { fracao: "1/6", valor: 1 / 6 },
+          { fracao: "1/5", valor: 1 / 5 },
+          { fracao: "1/4", valor: 1 / 4 },
+          { fracao: "1/3", valor: 1 / 3 },
+          { fracao: "3/8", valor: 3 / 8 },
+          { fracao: "2/5", valor: 2 / 5 },
+          { fracao: "5/12", valor: 5 / 12 },
+          { fracao: "11/24", valor: 11 / 24 },
+          { fracao: "1/2", valor: 1 / 2 },
+          { fracao: "3/5", valor: 3 / 5 },
+          { fracao: "2/3", valor: 2 / 3 },
+        ];
+
+        // Tabela de porcentagens
+        const porcentagens = [
+          16, 20, 25, 30, 40, 50, 60, 70,
+        ];
+
+        // Atualizar tabela de frações
+        const tabelaFracoes = document.querySelectorAll("#tfr tbody tr");
+        fracoes.forEach((item, index) => {
+          const diasCalculados = (dias * item.valor).toFixed(1);
+          tabelaFracoes[index].children[1].innerText = diasCalculados;
+        });
+
+        // Atualizar tabela de porcentagens
+        const tabelaPorcentagens = document.querySelectorAll("#tpc tbody tr");
+        console.log(tabelaPorcentagens);
+        porcentagens.forEach((percentual, index) => {
+          const diasCalculados = (dias * (percentual / 100)).toFixed(1);
+          tabelaPorcentagens[index].children[1].innerText = diasCalculados;
+        });
+      });
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
