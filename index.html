@@ -28,17 +28,17 @@
 
           <!-- Formulário para entrada de dados com floating -->
           <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="anos" placeholder="Anos">
+            <input type="number" class="form-control" id="anos" placeholder="Anos" min="0">
             <label for="anos">Anos</label>
           </div>
 
           <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="meses" placeholder="Meses">
+            <input type="number" class="form-control" id="meses" placeholder="Meses" min="0">
             <label for="meses">Meses</label>
           </div>
 
           <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="dias" placeholder="Dias">
+            <input type="number" class="form-control" id="dias" placeholder="Dias" min="0">
             <label for="dias">Dias</label>
           </div>
 
@@ -50,7 +50,7 @@
 
           <h3 class="mt-5">Conversão em anos</h3>
           <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="diasParaAno" placeholder="Dias">
+            <input type="number" class="form-control" id="diasParaAno" placeholder="Dias" min="0">
             <label for="diasParaAno">Dias</label>
           </div>
           <button class="btn btn-dark" id="calcularAnoBtn">Calcular</button>
@@ -82,6 +82,12 @@
         const meses = parseInt(document.getElementById("meses").value) || 0;  // Se vazio, considera como 0
         const dias = parseInt(document.getElementById("dias").value) || 0;  // Se vazio, considera como 0
 
+        if (anos < 0 || meses < 0 || dias < 0) {
+          // Exibir mensagem de erro
+          document.getElementById("resultado").innerText = "Por favor, informe um valor válido.";
+          return;
+        }
+
         // Calcular total de dias
         const diasPorAno = 365; // Assumindo 365 dias por ano (não considerando anos bissextos)
         const diasPorMes = 30;  // Assumindo uma média de 30 dias por mês
@@ -96,6 +102,12 @@
     // Função para calcular a conversão para anos, meses e dias por extenso
     document.getElementById('calcularAnoBtn').addEventListener('click', function() {
       const diasEntrada = parseInt(document.getElementById('diasParaAno').value) || 0;
+
+      if (diasEntrada < 0) {
+        // Exibir mensagem de erro
+        document.getElementById('resultadoAno').innerText = 'Por favor, informe um valor válido.';
+        return;
+      }
 
       // Calcular anos, meses e dias
       const anos = Math.floor(diasEntrada / 365); // Quantos anos completos
