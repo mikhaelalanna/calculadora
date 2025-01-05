@@ -173,8 +173,69 @@
         </div>
       </div> <!-- fecha row -->
 
-      <div class="row bg-light" style="min-height: 120px">
-        EM CONSTRUÇÃO
+      <div class="row" style="min-height: 120px">
+        <div class="col-12 col-md-6 p-3">
+          <h3>Datas e dias</h3>
+          <div class="row mt-3">
+            <!-- Linha com campo de data, dropdown e campo de dias -->
+            <div class="col-12">
+              <div class="input-group mb-3 gap-2">
+                <!-- Campo de data -->
+                <div class="form-floating">
+                  <input
+                      type="date"
+                      class="form-control"
+                      id="dataOP"
+                      >
+                      <label for="dataOP">Data</label>
+                </div>
+
+                <!-- Dropdown com + e - -->
+                <div class="dropdown">
+                  <button
+                      class="btn dropdown-toggle fs-4 text-white"
+                      type="button"
+                      id="operacaoDropdown"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      style="background-color: #591125;"
+                      >
+                      +
+                  </button>
+                    <ul class="dropdown-menu" aria-labelledby="operacaoDropdown">
+                      <li><a class="dropdown-item fs-4" data-value="+">+</a></li>
+                      <li><a class="dropdown-item fs-4" data-value="-">-</a></li>
+                    </ul>
+                </div>
+
+                <!-- Campo de dias -->
+                <div class="form-floating">
+                  <input
+                      type="number"
+                      class="form-control"
+                      id="diasOP"
+                      placeholder="Dias"
+                      min="0"
+                      >
+                      <label for="diasOP">Dias</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12 d-flex align-items-center">
+              <!-- Botão Calcular -->
+              <button class="btn text-white me-3" id="calcularOPBtn" style="background-color: #591125;">
+                Calcular
+              </button>
+              <!-- Resultado -->
+              <span id="resultadoOP">O resultado é dd/mm/yyyy</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 p-3">
+          <h3>Diferença entre datas</h3>
+        </div>
       </div>
 
     </div> <!-- fecha content -->
@@ -229,26 +290,26 @@
 
         if (anos > 0) {
           resultadoTexto += `${anos} ano${anos > 1 ? 's' : ''}`;
-          }
+        }
 
-          if (meses > 0) {
-            if (resultadoTexto) resultadoTexto += ", ";
-            resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
-            }
+        if (meses > 0) {
+          if (resultadoTexto) resultadoTexto += ", ";
+          resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
+        }
 
-            if (dias > 0) {
-              if (resultadoTexto) resultadoTexto += " e ";
-              resultadoTexto += `${dias} dia${dias > 1 ? 's' : ''}`;
-              }
+        if (dias > 0) {
+          if (resultadoTexto) resultadoTexto += " e ";
+          resultadoTexto += `${dias} dia${dias > 1 ? 's' : ''}`;
+        }
 
-              // Caso não haja anos, meses ou dias
-              if (resultadoTexto === "") {
-                resultadoTexto = "0 dias";
-              }
+        // Caso não haja anos, meses ou dias
+        if (resultadoTexto === "") {
+          resultadoTexto = "0 dias";
+        }
 
-              // Exibir o resultado por extenso
-              document.getElementById('resultadoAno').innerText = `Isto equivale a ${resultadoTexto}.`;
-            });
+        // Exibir o resultado por extenso
+        document.getElementById('resultadoAno').innerText = `Isto equivale a ${resultadoTexto}.`;
+      });
 
 
 
@@ -306,6 +367,56 @@
         row.addEventListener("mouseout", () => {
           row.classList.remove("table-active");
         });
+      });
+
+      // JavaScript para alterar o valor exibido no botão do dropdown
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function (event) {
+          event.preventDefault(); // Evita navegação no clique
+          const selectedValue = this.getAttribute('data-value'); // Obtém o valor selecionado (+ ou -)
+          const dropdownButton = document.getElementById('operacaoDropdown'); // Botão do dropdown
+          dropdownButton.textContent = selectedValue; // Altera o texto do botão
+        });
+      });
+
+      // Função para calcular e exibir o resultado
+      document.getElementById("calcularOPBtn").addEventListener("click", function() {
+        const dataInput = document.getElementById("dataOP");
+        const diasInput = document.getElementById("diasOP");
+        const operacaoDropdown = document.getElementById("operacaoDropdown");
+        const resultadoSpan = document.getElementById("resultadoOP");
+
+        // Obter a data do campo dataOP dividida em dia, mês e ano
+        const [anoOP, mesOP, diaOP] = dataInput.value.split("-");
+
+        const data = new Date(anoOP, mesOP - 1, diaOP); // Mês é base 0, por isso subtrai 1
+
+        // Obter o número de dias do campo diasOP
+        const dias = parseInt(diasInput.value);
+
+        if (isNaN(dias) || dias <= 0 || isNaN(data)) {
+          resultadoSpan.innerText = `Por favor, insira uma data válida e dias maiores que 0.`;
+          return;
+        }
+
+        // Obter a operação selecionada (+ ou -)
+        const operacao = operacaoDropdown.innerText.trim();
+
+        // Realizar a operação de adição ou subtração
+        if (operacao === "+") {
+          data.setDate(data.getDate() + dias); // Adiciona dias
+        } else if (operacao === "-") {
+          data.setDate(data.getDate() - dias); // Subtrai dias
+        }
+
+        // Formatar a data para dd/mm/yyyy
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        const ano = data.getFullYear();
+        const dataFormatada = `${dia}/${mes}/${ano}`;
+
+        // Exibir o resultado
+        resultadoSpan.innerText = `O resultado é ${dataFormatada}.`;
       });
 
     </script>
