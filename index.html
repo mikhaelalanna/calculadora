@@ -67,11 +67,18 @@
         <div class="col-12 col-md-7 border p-3">
           <h3>Frações e Porcentagem</h3>
 
-          <div class="d-flex align-items-center mb-3">
-            <input type="number" class="form-control me-2" id="diasFP" placeholder="Dias" min="0">
-            <button class="btn text-white" id="calcularFPBtn" style="background-color:#591125">
-              <i class="bi bi-calculator"></i> Calcular
-            </button>
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="d-flex align-items-center w-100">
+                <!-- Campo de texto (dias) -->
+                <input type="number" class="form-control me-2" id="diasFP" placeholder="Dias" min="0">
+
+                <!-- Botão calcular -->
+                <button class="btn text-white d-flex align-items-center" id="calcularFPBtn" style="background-color:#591125">
+                  <i class="bi bi-calculator me-2"></i> Calcular
+                </button>
+              </div>
+            </div>
           </div>
 
           <!-- Tabelas lado a lado -->
@@ -282,7 +289,7 @@
 
     </div> <!-- fecha content -->
 
-    <footer class="text-white text-center p-3 mt-5 footer" style="background-color:#591125">
+    <footer class="text-white text-center p-3 mt-3 footer" style="background-color:#591125">
       <p>&copy; 2025 Mikhaela Lanna. Todos os direitos reservados.</p>
     </footer>
 
@@ -332,12 +339,12 @@
 
         if (anos > 0) {
           resultadoTexto += `${anos} ano${anos > 1 ? 's' : ''}`;
-          }
+        }
 
-          if (meses > 0) {
-            if (resultadoTexto) resultadoTexto += ", ";
-            resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
-            }
+        if (meses > 0) {
+          if (resultadoTexto) resultadoTexto += ", ";
+          resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
+        }
 
         if (dias > 0) {
           if (resultadoTexto) resultadoTexto += " e ";
