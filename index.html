@@ -199,107 +199,91 @@
       </div> <!-- fecha row -->
 
       <div class="row">
+        <!-- Coluna para Datas e Dias -->
         <div class="col-12 col-md-6 p-3">
           <h3>Datas e dias</h3>
           <div class="row mt-3">
             <!-- Linha com campo de data, dropdown e campo de dias -->
             <div class="col-12">
-              <div class="input-group mb-3 gap-2">
+              <div class="input-group mb-3 gap-3">
                 <!-- Campo de data -->
                 <div class="form-floating">
-                  <input
-                      type="date"
-                      class="form-control"
-                      id="dataOP"
-                      >
-                      <label for="dataOP">Data</label>
+                  <input type="date" class="form-control" id="dataOP">
+                  <label for="dataOP">Data</label>
                 </div>
 
                 <!-- Dropdown com + e - -->
                 <div class="dropdown">
-                  <button
-                      class="btn dropdown-toggle fs-4 text-white"
-                      type="button"
-                      id="operacaoDropdown"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      style="background-color: #591125;"
-                      >
-                      +
+                  <button class="btn dropdown-toggle fs-4 text-white" type="button" id="operacaoDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #591125;">
+                    +
                   </button>
-                    <ul class="dropdown-menu" aria-labelledby="operacaoDropdown">
-                      <li><a class="dropdown-item fs-4" data-value="+">+</a></li>
-                      <li><a class="dropdown-item fs-4" data-value="-">-</a></li>
-                    </ul>
+                  <ul class="dropdown-menu" aria-labelledby="operacaoDropdown">
+                    <li><a class="dropdown-item fs-4" data-value="+">+</a></li>
+                    <li><a class="dropdown-item fs-4" data-value="-">-</a></li>
+                  </ul>
                 </div>
 
                 <!-- Campo de dias -->
                 <div class="form-floating">
-                  <input
-                      type="number"
-                      class="form-control"
-                      id="diasOP"
-                      placeholder="Dias"
-                      min="0"
-                      >
-                      <label for="diasOP">Dias</label>
+                  <input type="number" class="form-control" id="diasOP" placeholder="Dias" min="0">
+                  <label for="diasOP">Dias</label>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Linha do botão Calcular e Resultado -->
           <div class="row mt-3">
-            <div class="col-12 d-flex align-items-center">
+            <div class="col-12 d-flex align-items-center gap-3">
               <!-- Botão Calcular -->
-              <button class="btn text-white me-3" id="calcularOPBtn" style="background-color: #591125;">
+              <button class="btn text-white" id="calcularOPBtn" style="background-color: #591125;">
                 <i class="bi bi-calculator"></i> Calcular
               </button>
-              <!-- Resultado -->
-              <div class="d-flex align-items-center mt-3">
-                <span id="resultadoOP">O resultado é dd/mm/yyyy</span>
-                <button class="btn btn-light btn-sm ms-2" id="copiarOPBtn">
+
+              <!-- Resultado e botão copiar -->
+              <div class="d-flex align-items-center">
+                <span id="resultadoOP" class="me-2">O resultado é dd/mm/yyyy</span>
+                <button class="btn btn-light btn-sm" id="copiarOPBtn">
                   <i class="bi bi-copy"></i>
                 </button>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Coluna para Diferença entre Datas -->
         <div class="col-12 col-md-6 p-3">
           <h3>Diferença entre datas</h3>
-          <!-- Duas inputs de datas em uma linha em seguida na outra linha um botão e um texto na frente -->
           <div class="row mt-3">
             <div class="col-12">
-              <div class="input-group mb-3 gap-2">
+              <div class="input-group mb-3 gap-3">
                 <!-- Campo de data 1 -->
                 <div class="form-floating">
-                  <input
-                      type="date"
-                      class="form-control"
-                      id="data1"
-                      >
-                      <label for="data1">Data 1</label>
+                  <input type="date" class="form-control" id="data1">
+                  <label for="data1">Data 1</label>
                 </div>
 
                 <!-- Campo de data 2 -->
                 <div class="form-floating">
-                  <input
-                      type="date"
-                      class="form-control"
-                      id="data2"
-                      >
-                      <label for="data2">Data 2</label>
+                  <input type="date" class="form-control" id="data2">
+                  <label for="data2">Data 2</label>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="col-12 d-flex align-items-center">
+          <!-- Linha do botão Calcular e Resultado -->
+          <div class="row mt-3">
+            <div class="col-12 d-flex align-items-center gap-3">
               <!-- Botão Calcular -->
-              <button class="btn text-white me-3" id="calcularDifBtn" style="background-color: #591125;">
+              <button class="btn text-white" id="calcularDifBtn" style="background-color: #591125;">
                 <i class="bi bi-calculator"></i> Calcular
               </button>
-              <!-- Resultado -->
-              <div class="d-flex align-items-center mt-3">
-                <span id="resultadoDif">A diferença é de (?) dias.</span>
-                <button class="btn btn-light btn-sm ms-2" id="copiarDifBtn">
+
+              <!-- Resultado e botão copiar -->
+              <div class="d-flex align-items-center">
+                <span id="resultadoDif" class="me-2">A diferença é de (?) dias.</span>
+                <button class="btn btn-light btn-sm" id="copiarDifBtn">
                   <i class="bi bi-copy"></i>
                 </button>
               </div>
