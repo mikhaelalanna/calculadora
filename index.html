@@ -1,304 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mikhaela Lanna | Calculadora de Execução Penal</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Mikhaela Lanna</title>
     <link rel="icon" type="image/x-icon" href="assets/ml-logo-white.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  </head>
-  <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-dark navbar-expand-lg" style="background-color:#591125">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="assets/ml-logo-white.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-          <span class="d-none d-md-inline d-lg-inline">Mikhaela Lanna &#124;</span>
-          <span>Calculadora de Execução Penal</span>
-        </a>
-      </div>
-    </nav>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container-login { /* Renomeado para evitar conflito com .container do Bootstrap */
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 90%;
+        }
+        .logo-login { /* Renomeado para evitar conflito com .logo do Bootstrap */
+            width: 180px; /* Ajuste o tamanho da sua logo */
+            height: auto;
+            margin-bottom: 35px;
+            display: block; /* Para centralizar a imagem */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input.form-control-password { /* Estilo específico para o input de senha */
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        button.btn-access { /* Estilo específico para o botão */
+            padding: 12px 30px;
+            background-color: #591125; /* Cor da sua marca */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        button.btn-access:hover {
+            background-color: #400c1b; /* Tom mais escuro para o hover */
+            transform: translateY(-2px);
+        }
+        #mensagemErro {
+            color: #dc3545; /* Cor de erro do Bootstrap */
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-login">
+        <img src="assets/ml-logo.webp" alt="Logo Mikhaela Lanna" class="logo-login">
+        <input type="password" class="form-control-password" id="senhaAcesso" placeholder="coloque aqui a senha de acesso">
+        <button class="btn-access" onclick="verificarAcesso()">Acessar</button>
+        <p id="mensagemErro"></p>
+    </div>
 
-    <!-- content -->
-    <div class="container-fluid mt-4">
-      <div class="row mb-3">
-        <!-- Coluna 1: 40% -->
-        <div class="col-12 col-md-5 p-3">
-          <!-- Título -->
-          <h3>Conversão para dias</h3>
-
-          <!-- Formulário para entrada de dados com floating -->
-          <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="anos" placeholder="Anos" min="0">
-            <label for="anos">Anos</label>
-          </div>
-
-          <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="meses" placeholder="Meses" min="0">
-            <label for="meses">Meses</label>
-          </div>
-
-          <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="dias" placeholder="Dias" min="0">
-            <label for="dias">Dias</label>
-          </div>
-
-          <!-- Botão Calcular -->
-          <button class="btn text-white" id="calcularBtn" style="background-color:#591125">
-            <i class="bi bi-calculator"></i> Calcular
-          </button>
-
-          <!-- Texto de resultado -->
-          <div class="d-flex align-items-center mt-3">
-            <p class="mb-0" id="resultado">Isto equivale a (?) dias.</p>
-            <button class="btn btn-light btn-sm ms-2" id="copiarCvDiasBtn">
-              <i class="bi bi-copy"></i>
-            </button>
-          </div>
-
-          <h3 class="mt-5">Conversão em anos</h3>
-          <div class="mb-3 form-floating">
-            <input type="number" class="form-control" id="diasParaAno" placeholder="Dias" min="0">
-            <label for="diasParaAno">Dias</label>
-          </div>
-          <button class="btn text-white" id="calcularAnoBtn" style="background-color:#591125">
-            <i class="bi bi-calculator"></i> Calcular
-          </button>
-
-          <div class="d-flex align-items-center mt-3">
-            <p class="mb-0" id="resultadoAno">Isto equivale a (?) anos.</p>
-            <button class="btn btn-light btn-sm ms-2" id="copiarCvAnoBtn">
-              <i class="bi bi-copy"></i>
-            </button>
-          </div>
-
-        </div>
-        <!-- Coluna 2: 60% -->
-        <div class="col-12 col-md-7 border p-3">
-          <h3>Frações e Porcentagem</h3>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <div class="d-flex align-items-center w-100">
-                <!-- Campo de texto (dias) -->
-                <input type="number" class="form-control me-2" id="diasFP" placeholder="Dias" min="0">
-
-                <!-- Botão calcular -->
-                <button class="btn text-white d-flex align-items-center" id="calcularFPBtn" style="background-color:#591125">
-                  <i class="bi bi-calculator me-2"></i> Calcular
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tabelas lado a lado -->
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <table id="tfr" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Fração</th>
-                    <th scope="col">Número de Dias</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1/6</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>1/5</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>1/4</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>1/3</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>3/8</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>2/5</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>5/12</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>11/24</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>1/2</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>3/5</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>2/3</td>
-                    <td>0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-12 col-md-6">
-              <table id="tpc" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Porcentagem</th>
-                    <th scope="col">Número de Dias</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>16%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>20%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>25%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>30%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>40%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>50%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>60%</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>70%</td>
-                    <td>0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> <!-- fecha row -->
-
-      <div class="row">
-        <!-- Coluna para Datas e Dias -->
-        <div class="col-12 col-md-6 p-3">
-          <h3>Datas e dias</h3>
-          <div class="row mt-3">
-            <!-- Linha com campo de data, dropdown e campo de dias -->
-            <div class="col-12">
-              <div class="input-group mb-3 gap-3">
-                <!-- Campo de data -->
-                <div class="form-floating">
-                  <input type="date" class="form-control" id="dataOP">
-                  <label for="dataOP">Data</label>
-                </div>
-
-                <!-- Dropdown com + e - -->
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle fs-4 text-white" type="button" id="operacaoDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #591125;">
-                    +
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="operacaoDropdown">
-                    <li><a class="dropdown-item fs-4" data-value="+">+</a></li>
-                    <li><a class="dropdown-item fs-4" data-value="-">-</a></li>
-                  </ul>
-                </div>
-
-                <!-- Campo de dias -->
-                <div class="form-floating">
-                  <input type="number" class="form-control" id="diasOP" placeholder="Dias" min="0">
-                  <label for="diasOP">Dias</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Linha do botão Calcular e Resultado -->
-          <div class="row mt-3">
-            <div class="col-12 d-flex align-items-center gap-3">
-              <!-- Botão Calcular -->
-              <button class="btn text-white" id="calcularOPBtn" style="background-color: #591125;">
-                <i class="bi bi-calculator"></i> Calcular
-              </button>
-
-              <!-- Resultado e botão copiar -->
-              <div class="d-flex align-items-center">
-                <span id="resultadoOP" class="me-2">O resultado é dd/mm/yyyy</span>
-                <button class="btn btn-light btn-sm" id="copiarOPBtn">
-                  <i class="bi bi-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Coluna para Diferença entre Datas -->
-        <div class="col-12 col-md-6 p-3">
-          <h3>Diferença entre datas</h3>
-          <div class="row mt-3">
-            <div class="col-12">
-              <div class="input-group mb-3 gap-3">
-                <!-- Campo de data 1 -->
-                <div class="form-floating">
-                  <input type="date" class="form-control" id="data1">
-                  <label for="data1">Data 1</label>
-                </div>
-
-                <!-- Campo de data 2 -->
-                <div class="form-floating">
-                  <input type="date" class="form-control" id="data2">
-                  <label for="data2">Data 2</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Linha do botão Calcular e Resultado -->
-          <div class="row mt-3">
-            <div class="col-12 d-flex align-items-center gap-3">
-              <!-- Botão Calcular -->
-              <button class="btn text-white" id="calcularDifBtn" style="background-color: #591125;">
-                <i class="bi bi-calculator"></i> Calcular
-              </button>
-
-              <!-- Resultado e botão copiar -->
-              <div class="d-flex align-items-center">
-                <span id="resultadoDif" class="me-2">A diferença é de (?) dias.</span>
-                <button class="btn btn-light btn-sm" id="copiarDifBtn">
-                  <i class="bi bi-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div> <!-- fecha content -->
-
-    <footer class="text-white text-center p-3 mt-3 footer" style="background-color:#591125">
-      <p>&copy; 2025 Mikhaela Lanna. Todos os direitos reservados.</p>
-    </footer>
-
+    <script src="assets/a.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="assets/calculadora.js"></script>
-  </body>
+</body>
 </html>
