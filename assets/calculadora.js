@@ -216,62 +216,23 @@ function mostrarCopiado(botao, texto) {
   }, 1500);
 }
 
-// copiarCvDiasBtn
-document.getElementById("copiarCvDiasBtn").addEventListener("click", function() {
-  const resultado = document.getElementById("resultado");
+// Registra um botão que copia o texto de um resultado, removendo o prefixo e o ponto final
+function configurarCopia(botaoId, resultadoId, prefixo) {
+  document.getElementById(botaoId).addEventListener("click", function() {
+    let texto = document.getElementById(resultadoId).innerText.replace(prefixo, "");
 
-  var texto = resultado.innerText.replace('Isto equivale a ', '');
+    // Remove o ponto final, se presente
+    if (texto.endsWith(".")) {
+      texto = texto.slice(0, -1);
+    }
 
-  // Remove o ponto final, se presente
-  if (texto.endsWith('.')) {
-    texto = texto.slice(0, -1);
-  }
+    mostrarCopiado(this, texto);
+  });
+}
 
-  mostrarCopiado(this, texto);
-});
-
-// copiarCvAnoBtn
-document.getElementById("copiarCvAnoBtn").addEventListener("click", function() {
-  const resultado = document.getElementById("resultadoAno");
-
-  var texto = resultado.innerText.replace('Isto equivale a ', '');
-
-  // Remove o ponto final, se presente
-  if (texto.endsWith('.')) {
-    texto = texto.slice(0, -1);
-  }
-
-  mostrarCopiado(this, texto);
-});
-
-// copiarOPBtn
-document.getElementById("copiarOPBtn").addEventListener("click", function() {
-  const resultado = document.getElementById("resultadoOP");
-
-  var texto = resultado.innerText.replace('O resultado é ', '');
-
-  // Remove o ponto final, se presente
-  if (texto.endsWith('.')) {
-    texto = texto.slice(0, -1);
-  }
-
-  mostrarCopiado(this, texto);
-});
-
-
-
-// copiarDifBtn
-document.getElementById("copiarDifBtn").addEventListener("click", function() {
-  const resultado = document.getElementById("resultadoDif");
-
-  var texto = resultado.innerText.replace('A diferença é de ', '');
-
-  // Remove o ponto final, se presente
-  if (texto.endsWith('.')) {
-    texto = texto.slice(0, -1);
-  }
-
-  mostrarCopiado(this, texto);
-});
+configurarCopia("copiarCvDiasBtn", "resultado", "Isto equivale a ");
+configurarCopia("copiarCvAnoBtn", "resultadoAno", "Isto equivale a ");
+configurarCopia("copiarOPBtn", "resultadoOP", "O resultado é ");
+configurarCopia("copiarDifBtn", "resultadoDif", "A diferença é de ");
 
 
