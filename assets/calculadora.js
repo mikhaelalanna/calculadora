@@ -13,11 +13,13 @@ function lerCampoInteiro(id) {
   return numero;
 }
 
-// Escreve um resultado no elemento, removendo o estilo de dica do estado inicial
-function definirResultado(id, texto) {
+// Escreve um resultado no elemento: "sucesso" destaca em negrito, "erro" em vermelho.
+// Também remove o estilo de dica do estado inicial.
+function definirResultado(id, texto, tipo = "sucesso") {
   const el = document.getElementById(id);
   el.textContent = texto;
-  el.classList.remove("text-muted", "fst-italic");
+  el.classList.remove("text-muted", "fst-italic", "text-danger", "fw-bold");
+  el.classList.add(tipo === "erro" ? "text-danger" : "fw-bold");
 }
 
 // Função que calcula a conversão para dias
@@ -29,7 +31,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
 
   if (anos === null || meses === null || dias === null) {
     // Exibir mensagem de erro
-    definirResultado("resultado", "Por favor, informe um valor válido.");
+    definirResultado("resultado", "Por favor, informe um valor válido.", "erro");
     return;
   }
 
@@ -47,7 +49,7 @@ document.getElementById('calcularAnoBtn').addEventListener('click', function() {
 
   if (diasEntrada === null) {
     // Exibir mensagem de erro
-    definirResultado('resultadoAno', 'Por favor, informe um valor válido.');
+    definirResultado('resultadoAno', 'Por favor, informe um valor válido.', 'erro');
     return;
   }
 
@@ -165,7 +167,7 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const dias = parseInt(diasInput.value, 10);
 
   if (isNaN(dias) || dias <= 0 || isNaN(data)) {
-    definirResultado("resultadoOP", "Por favor, insira uma data válida e dias maiores que 0.");
+    definirResultado("resultadoOP", "Por favor, insira uma data válida e dias maiores que 0.", "erro");
     return;
   }
 
@@ -213,7 +215,7 @@ document.getElementById("calcularDifBtn").addEventListener("click", function() {
     definirResultado("resultadoDif", `A diferença é de ${diffDays} dias.`);
   } else {
     // Caso as datas não estejam preenchidas
-    definirResultado("resultadoDif", "Por favor, insira ambas as datas.");
+    definirResultado("resultadoDif", "Por favor, insira ambas as datas.", "erro");
   }
 });
 
