@@ -179,9 +179,11 @@ document.getElementById("calcularDifBtn").addEventListener("click", function() {
 
   // Verificar se as duas datas foram preenchidas
   if (data1 && data2) {
-    // Converter para objetos Date
-    const date1 = new Date(data1);
-    const date2 = new Date(data2);
+    // Converter para objetos Date usando horário local (evita deslocamento de fuso do ISO)
+    const [a1, m1, d1] = data1.split("-").map(Number);
+    const [a2, m2, d2] = data2.split("-").map(Number);
+    const date1 = new Date(a1, m1 - 1, d1);
+    const date2 = new Date(a2, m2 - 1, d2);
 
     // Calcular a diferença em milissegundos
     const diffTime = Math.abs(date2 - date1);
