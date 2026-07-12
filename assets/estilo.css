@@ -1,0 +1,29 @@
+/* Identidade visual — Calculadora de Execução Penal */
+:root {
+  --brand: #591125;       /* vinho da marca */
+  --brand-dark: #400c1b;  /* tom mais escuro para hover/foco */
+}
+
+/* Fundo da marca (navbar, rodapé) */
+.bg-brand {
+  background-color: var(--brand) !important;
+}
+
+/* Botão da marca */
+.btn-brand {
+  background-color: var(--brand);
+  color: #fff;
+}
+
+.btn-brand:hover,
+.btn-brand:focus {
+  background-color: var(--brand-dark);
+  color: #fff;
+}
+
+/* Foco visível na cor da marca (acessibilidade por teclado) */
+.btn-brand:focus-visible {
+  outline: 3px solid var(--brand-dark);
+  outline-offset: 2px;
+  box-shadow: none;
+}
