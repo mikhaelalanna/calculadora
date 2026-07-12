@@ -200,6 +200,22 @@ document.getElementById("calcularDifBtn").addEventListener("click", function() {
 });
 
 
+// Copia o texto e exibe "Copiado!" no botão por 1,5s, restaurando o conteúdo original
+function mostrarCopiado(botao, texto) {
+  navigator.clipboard.writeText(texto);
+
+  if (botao.dataset.copiando) return; // evita capturar "Copiado!" em cliques repetidos
+  botao.dataset.copiando = "true";
+
+  const conteudoOriginal = botao.innerHTML;
+  botao.innerHTML = "Copiado!";
+
+  setTimeout(() => {
+    botao.innerHTML = conteudoOriginal;
+    delete botao.dataset.copiando;
+  }, 1500);
+}
+
 // copiarCvDiasBtn
 document.getElementById("copiarCvDiasBtn").addEventListener("click", function() {
   const resultado = document.getElementById("resultado");
@@ -211,13 +227,7 @@ document.getElementById("copiarCvDiasBtn").addEventListener("click", function() 
     texto = texto.slice(0, -1);
   }
 
-  const tempInput = document.createElement('input');
-  document.body.appendChild(tempInput);
-  tempInput.value = texto;
-  tempInput.select();
-  document.execCommand('copy');
-
-  document.body.removeChild(tempInput);
+  mostrarCopiado(this, texto);
 });
 
 // copiarCvAnoBtn
@@ -231,13 +241,7 @@ document.getElementById("copiarCvAnoBtn").addEventListener("click", function() {
     texto = texto.slice(0, -1);
   }
 
-  const tempInput = document.createElement('input');
-  document.body.appendChild(tempInput);
-  tempInput.value = texto;
-  tempInput.select();
-  document.execCommand('copy');
-
-  document.body.removeChild(tempInput);
+  mostrarCopiado(this, texto);
 });
 
 // copiarOPBtn
@@ -251,13 +255,7 @@ document.getElementById("copiarOPBtn").addEventListener("click", function() {
     texto = texto.slice(0, -1);
   }
 
-  const tempInput = document.createElement('input');
-  document.body.appendChild(tempInput);
-  tempInput.value = texto;
-  tempInput.select();
-  document.execCommand('copy');
-
-  document.body.removeChild(tempInput);
+  mostrarCopiado(this, texto);
 });
 
 
@@ -273,13 +271,7 @@ document.getElementById("copiarDifBtn").addEventListener("click", function() {
     texto = texto.slice(0, -1);
   }
 
-  const tempInput = document.createElement('input');
-  document.body.appendChild(tempInput);
-  tempInput.value = texto;
-  tempInput.select();
-  document.execCommand('copy');
-
-  document.body.removeChild(tempInput);
+  mostrarCopiado(this, texto);
 });
 
 
