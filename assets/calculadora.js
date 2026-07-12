@@ -2,14 +2,25 @@
 const DIAS_POR_ANO = 365;
 const DIAS_POR_MES = 30;
 
+// Lê um campo inteiro: vazio vira 0; texto inválido ou negativo retorna null (inválido)
+function lerCampoInteiro(id) {
+  const valor = document.getElementById(id).value.trim();
+  if (valor === "") return 0;
+
+  const numero = parseInt(valor, 10);
+  if (isNaN(numero) || numero < 0) return null;
+
+  return numero;
+}
+
 // Função que calcula a conversão para dias
 document.getElementById("calcularBtn").addEventListener("click", function() {
-  // Obter valores dos campos
-  const anos = parseInt(document.getElementById("anos").value, 10) || 0;  // Se vazio, considera como 0
-  const meses = parseInt(document.getElementById("meses").value, 10) || 0;  // Se vazio, considera como 0
-  const dias = parseInt(document.getElementById("dias").value, 10) || 0;  // Se vazio, considera como 0
+  // Obter valores dos campos (vazio = 0; texto inválido/negativo = null)
+  const anos = lerCampoInteiro("anos");
+  const meses = lerCampoInteiro("meses");
+  const dias = lerCampoInteiro("dias");
 
-  if (anos < 0 || meses < 0 || dias < 0) {
+  if (anos === null || meses === null || dias === null) {
     // Exibir mensagem de erro
     document.getElementById("resultado").innerText = "Por favor, informe um valor válido.";
     return;
@@ -25,9 +36,9 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
 
 // Função para calcular a conversão para anos, meses e dias por extenso
 document.getElementById('calcularAnoBtn').addEventListener('click', function() {
-  const diasEntrada = parseInt(document.getElementById('diasParaAno').value, 10) || 0;
+  const diasEntrada = lerCampoInteiro('diasParaAno');
 
-  if (diasEntrada < 0) {
+  if (diasEntrada === null) {
     // Exibir mensagem de erro
     document.getElementById('resultadoAno').innerText = 'Por favor, informe um valor válido.';
     return;
