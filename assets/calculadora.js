@@ -47,7 +47,7 @@ document.getElementById('calcularAnoBtn').addEventListener('click', function() {
 
   if (meses > 0) {
     if (resultadoTexto) resultadoTexto += ", ";
-    resultadoTexto += `${meses} mes${meses > 1 ? 'es' : ''}`;
+    resultadoTexto += `${meses} ${meses > 1 ? 'meses' : 'mês'}`;
   }
 
   if (dias > 0) {
