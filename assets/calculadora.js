@@ -1,3 +1,7 @@
+// Constantes de conversão (aproximação: ano de 365 dias sem bissexto, mês de 30 dias)
+const DIAS_POR_ANO = 365;
+const DIAS_POR_MES = 30;
+
 // Função que calcula a conversão para dias
 document.getElementById("calcularBtn").addEventListener("click", function() {
   // Obter valores dos campos
@@ -12,10 +16,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
   }
 
   // Calcular total de dias
-  const diasPorAno = 365; // Assumindo 365 dias por ano (não considerando anos bissextos)
-  const diasPorMes = 30;  // Assumindo uma média de 30 dias por mês
-
-  const totalDias = (anos * diasPorAno) + (meses * diasPorMes) + dias;
+  const totalDias = (anos * DIAS_POR_ANO) + (meses * DIAS_POR_MES) + dias;
 
   // Exibir o resultado
   document.getElementById("resultado").innerText = `Isto equivale a ${totalDias} dias.`;
@@ -33,10 +34,10 @@ document.getElementById('calcularAnoBtn').addEventListener('click', function() {
   }
 
   // Calcular anos, meses e dias
-  const anos = Math.floor(diasEntrada / 365); // Quantos anos completos
-  const diasRestantes = diasEntrada % 365; // Resto de dias após remover os anos completos
-  const meses = Math.floor(diasRestantes / 30); // Quantos meses completos
-  const dias = diasRestantes % 30; // Restante de dias após remover os meses completos
+  const anos = Math.floor(diasEntrada / DIAS_POR_ANO); // Quantos anos completos
+  const diasRestantes = diasEntrada % DIAS_POR_ANO; // Resto de dias após remover os anos completos
+  const meses = Math.floor(diasRestantes / DIAS_POR_MES); // Quantos meses completos
+  const dias = diasRestantes % DIAS_POR_MES; // Restante de dias após remover os meses completos
 
   // Montar a string de resultado por extenso
   let resultadoTexto = "";
