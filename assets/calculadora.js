@@ -1,9 +1,9 @@
 // Função que calcula a conversão para dias
 document.getElementById("calcularBtn").addEventListener("click", function() {
   // Obter valores dos campos
-  const anos = parseInt(document.getElementById("anos").value) || 0;  // Se vazio, considera como 0
-  const meses = parseInt(document.getElementById("meses").value) || 0;  // Se vazio, considera como 0
-  const dias = parseInt(document.getElementById("dias").value) || 0;  // Se vazio, considera como 0
+  const anos = parseInt(document.getElementById("anos").value, 10) || 0;  // Se vazio, considera como 0
+  const meses = parseInt(document.getElementById("meses").value, 10) || 0;  // Se vazio, considera como 0
+  const dias = parseInt(document.getElementById("dias").value, 10) || 0;  // Se vazio, considera como 0
 
   if (anos < 0 || meses < 0 || dias < 0) {
     // Exibir mensagem de erro
@@ -24,7 +24,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
 
 // Função para calcular a conversão para anos, meses e dias por extenso
 document.getElementById('calcularAnoBtn').addEventListener('click', function() {
-  const diasEntrada = parseInt(document.getElementById('diasParaAno').value) || 0;
+  const diasEntrada = parseInt(document.getElementById('diasParaAno').value, 10) || 0;
 
   if (diasEntrada < 0) {
     // Exibir mensagem de erro
@@ -144,7 +144,7 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const data = new Date(anoOP, mesOP - 1, diaOP); // Mês é base 0, por isso subtrai 1
 
   // Obter o número de dias do campo diasOP
-  const dias = parseInt(diasInput.value);
+  const dias = parseInt(diasInput.value, 10);
 
   if (isNaN(dias) || dias <= 0 || isNaN(data)) {
     resultadoSpan.innerText = `Por favor, insira uma data válida e dias maiores que 0.`;
