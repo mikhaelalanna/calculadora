@@ -62,3 +62,38 @@ h1, h2, h3, h4, h5, h6,
   outline-offset: 2px;
   box-shadow: none;
 }
+
+/* --- Assinatura: tabelas de frações e porcentagem --- */
+/* Faixas listradas num latão bem sutil */
+#tfr, #tpc {
+  --bs-table-striped-bg: rgba(156, 123, 63, .06);
+}
+
+/* Cabeçalho: rótulo na cor da marca, sublinhado em latão */
+#tfr thead th, #tpc thead th {
+  color: var(--brand);
+  font-weight: 600;
+  border-bottom: 2px solid var(--brass);
+}
+
+/* Corpo: dados em fonte monoespaçada (alinhamento tabular) */
+#tfr tbody td, #tpc tbody td {
+  font-family: var(--fonte-dados);
+  vertical-align: middle;
+}
+
+/* 1ª coluna (fração / porcentagem): destaque em latão */
+#tfr tbody td:first-child, #tpc tbody td:first-child {
+  color: var(--brass);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* 2ª coluna (número de dias): alinhada à direita para leitura tabular */
+#tfr thead th:last-child, #tpc thead th:last-child,
+#tfr tbody td:last-child, #tpc tbody td:last-child {
+  text-align: right;
+}
+#tfr tbody td:last-child, #tpc tbody td:last-child {
+  color: var(--ink);
+}
