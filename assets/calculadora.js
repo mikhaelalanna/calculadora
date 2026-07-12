@@ -104,7 +104,6 @@ document.getElementById("calcularFPBtn").addEventListener("click", function () {
 
   // Atualizar tabela de porcentagens
   const tabelaPorcentagens = document.querySelectorAll("#tpc tbody tr");
-  console.log(tabelaPorcentagens);
   porcentagens.forEach((percentual, index) => {
     const diasCalculados = (dias * (percentual / 100)).toFixed(1);
     tabelaPorcentagens[index].children[1].innerText = diasCalculados;
