@@ -16,62 +16,87 @@
     <link rel="icon" type="image/x-icon" href="assets/ml-logo-white.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@500;600&display=swap" rel="stylesheet">
+    <link href="assets/estilo.css" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            padding: 20px;
         }
-        .container-login { /* Renomeado para evitar conflito com .container do Bootstrap */
+        .container-login {
             text-align: center;
             background-color: #fff;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-top: 4px solid var(--brass); /* selo de latão da marca */
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(89, 17, 37, 0.12);
             max-width: 400px;
-            width: 90%;
+            width: 100%;
         }
-        .logo-login { /* Renomeado para evitar conflito com .logo do Bootstrap */
-            width: 180px; /* Ajuste o tamanho da sua logo */
+        .logo-login {
+            width: 160px;
             height: auto;
-            margin-bottom: 35px;
-            display: block; /* Para centralizar a imagem */
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 24px;
+            display: block;
         }
-        input.form-control-password { /* Estilo específico para o input de senha */
+        .login-title {
+            font-family: var(--fonte-titulo);
+            color: var(--brand);
+            font-weight: 600;
+            font-size: 1.6rem;
+            margin: 0 0 4px;
+        }
+        .login-sub {
+            color: var(--stone);
+            font-size: .95rem;
+            margin: 0 0 24px;
+        }
+        input.form-control-password {
             padding: 12px;
             width: 100%;
             margin-bottom: 20px;
             border: 1px solid #ced4da;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 1.1em;
             text-align: center;
         }
-        button.btn-access { /* Estilo específico para o botão */
+        input.form-control-password:focus {
+            outline: none;
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(89, 17, 37, 0.15);
+        }
+        button.btn-access {
             padding: 12px 30px;
-            background-color: #591125; /* Cor da sua marca */
+            background-color: var(--brand);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 1.1em;
+            font-weight: 500;
             transition: background-color 0.3s ease, transform 0.2s ease;
             width: 100%;
         }
         button.btn-access:hover {
-            background-color: #400c1b; /* Tom mais escuro para o hover */
+            background-color: var(--brand-dark);
             transform: translateY(-2px);
         }
+        button.btn-access:focus-visible {
+            outline: 3px solid var(--brand-dark);
+            outline-offset: 2px;
+        }
         #mensagemErro {
-            color: #dc3545; /* Cor de erro do Bootstrap */
+            color: #dc3545;
             margin-top: 20px;
-            font-weight: bold;
+            margin-bottom: 0;
+            font-weight: 600;
             font-size: 1em;
         }
     </style>
@@ -79,9 +104,11 @@
 <body>
     <div class="container-login">
         <img src="assets/ml-logo.webp" alt="Logo Mikhaela Lanna" class="logo-login">
-        <input type="password" class="form-control-password" id="senhaAcesso" placeholder="coloque aqui a senha de acesso">
+        <h1 class="login-title">Acesso restrito</h1>
+        <p class="login-sub">Informe a senha para usar a calculadora.</p>
+        <input type="password" class="form-control-password" id="senhaAcesso" placeholder="Senha de acesso">
         <button class="btn-access" onclick="verificarAcesso()">Acessar</button>
-        <p id="mensagemErro"></p>
+        <p id="mensagemErro" aria-live="polite"></p>
     </div>
 
     <script src="assets/a.js"></script>
