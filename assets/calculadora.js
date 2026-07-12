@@ -142,13 +142,16 @@ document.querySelectorAll("table tbody tr").forEach(row => {
   });
 });
 
-// JavaScript para alterar o valor exibido no botão do dropdown
+// Atualiza a operação selecionada no botão do dropdown
 document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.addEventListener('click', function (event) {
-    event.preventDefault(); // Evita navegação no clique
-    const selectedValue = this.getAttribute('data-value'); // Obtém o valor selecionado (+ ou -)
-    const dropdownButton = document.getElementById('operacaoDropdown'); // Botão do dropdown
-    dropdownButton.textContent = selectedValue; // Altera o texto do botão
+  item.addEventListener('click', function () {
+    const selectedValue = this.getAttribute('data-value'); // Valor selecionado (+ ou -)
+    const dropdownButton = document.getElementById('operacaoDropdown');
+
+    dropdownButton.textContent = selectedValue;          // Texto visível
+    dropdownButton.dataset.operacao = selectedValue;     // Estado lógico lido no cálculo
+    dropdownButton.setAttribute('aria-label',
+      selectedValue === '+' ? 'Operação: adicionar dias' : 'Operação: subtrair dias');
   });
 });
 
@@ -172,7 +175,7 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   }
 
   // Obter a operação selecionada (+ ou -)
-  const operacao = operacaoDropdown.innerText.trim();
+  const operacao = operacaoDropdown.dataset.operacao;
 
   // Realizar a operação de adição ou subtração
   if (operacao === "+") {
