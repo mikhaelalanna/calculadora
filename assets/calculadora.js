@@ -13,6 +13,13 @@ function lerCampoInteiro(id) {
   return numero;
 }
 
+// Escreve um resultado no elemento, removendo o estilo de dica do estado inicial
+function definirResultado(id, texto) {
+  const el = document.getElementById(id);
+  el.textContent = texto;
+  el.classList.remove("text-muted", "fst-italic");
+}
+
 // Função que calcula a conversão para dias
 document.getElementById("calcularBtn").addEventListener("click", function() {
   // Obter valores dos campos (vazio = 0; texto inválido/negativo = null)
@@ -22,7 +29,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
 
   if (anos === null || meses === null || dias === null) {
     // Exibir mensagem de erro
-    document.getElementById("resultado").innerText = "Por favor, informe um valor válido.";
+    definirResultado("resultado", "Por favor, informe um valor válido.");
     return;
   }
 
@@ -30,7 +37,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
   const totalDias = (anos * DIAS_POR_ANO) + (meses * DIAS_POR_MES) + dias;
 
   // Exibir o resultado
-  document.getElementById("resultado").innerText = `Isto equivale a ${totalDias} dias.`;
+  definirResultado("resultado", `Isto equivale a ${totalDias} dias.`);
 });
 
 
@@ -40,7 +47,7 @@ document.getElementById('calcularAnoBtn').addEventListener('click', function() {
 
   if (diasEntrada === null) {
     // Exibir mensagem de erro
-    document.getElementById('resultadoAno').innerText = 'Por favor, informe um valor válido.';
+    definirResultado('resultadoAno', 'Por favor, informe um valor válido.');
     return;
   }
 
@@ -73,7 +80,7 @@ document.getElementById('calcularAnoBtn').addEventListener('click', function() {
   }
 
   // Exibir o resultado por extenso
-  document.getElementById('resultadoAno').innerText = `Isto equivale a ${resultadoTexto}.`;
+  definirResultado('resultadoAno', `Isto equivale a ${resultadoTexto}.`);
 });
 
 
@@ -148,7 +155,6 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const dataInput = document.getElementById("dataOP");
   const diasInput = document.getElementById("diasOP");
   const operacaoDropdown = document.getElementById("operacaoDropdown");
-  const resultadoSpan = document.getElementById("resultadoOP");
 
   // Obter a data do campo dataOP dividida em dia, mês e ano
   const [anoOP, mesOP, diaOP] = dataInput.value.split("-");
@@ -159,7 +165,7 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const dias = parseInt(diasInput.value, 10);
 
   if (isNaN(dias) || dias <= 0 || isNaN(data)) {
-    resultadoSpan.innerText = `Por favor, insira uma data válida e dias maiores que 0.`;
+    definirResultado("resultadoOP", "Por favor, insira uma data válida e dias maiores que 0.");
     return;
   }
 
@@ -180,7 +186,7 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const dataFormatada = `${dia}/${mes}/${ano}`;
 
   // Exibir o resultado
-  resultadoSpan.innerText = `O resultado é ${dataFormatada}.`;
+  definirResultado("resultadoOP", `O resultado é ${dataFormatada}.`);
 });
 
 // Função para calcular a diferença entre duas datas
@@ -204,10 +210,10 @@ document.getElementById("calcularDifBtn").addEventListener("click", function() {
     const diffDays = Math.floor(diffTime / (1000 * 3600 * 24));
 
     // Exibir o resultado
-    document.getElementById("resultadoDif").textContent = `A diferença é de ${diffDays} dias.`;
+    definirResultado("resultadoDif", `A diferença é de ${diffDays} dias.`);
   } else {
     // Caso as datas não estejam preenchidas
-    document.getElementById("resultadoDif").textContent = "Por favor, insira ambas as datas.";
+    definirResultado("resultadoDif", "Por favor, insira ambas as datas.");
   }
 });
 
