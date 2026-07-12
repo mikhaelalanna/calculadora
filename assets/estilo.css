@@ -2,6 +2,41 @@
 :root {
   --brand: #591125;       /* vinho da marca */
   --brand-dark: #400c1b;  /* tom mais escuro para hover/foco */
+  --brass: #9C7B3F;       /* latão: acento (frações, filetes) */
+  --ink: #1F1A1B;         /* texto principal (preto quente) */
+  --stone: #6B6360;       /* texto secundário */
+  --surface: #FAFAF8;     /* fundo da página (neutro quase-branco) */
+
+  /* Fontes: interface em Plex Sans, títulos em Spectral, números em Plex Mono */
+  --bs-body-font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  --fonte-titulo: 'Spectral', Georgia, serif;
+  --fonte-dados: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+/* Títulos em Spectral */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.navbar-brand {
+  font-family: var(--fonte-titulo);
+}
+
+/* Títulos de seção (dentro dos cards) com filete curto de latão */
+.card-body h2 {
+  color: var(--brand);
+}
+.card-body h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: 8px;
+  background-color: var(--brass);
+  border-radius: 2px;
 }
 
 /* Fundo da marca (navbar, rodapé) */
