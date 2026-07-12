@@ -2,7 +2,8 @@
 :root {
   --brand: #591125;       /* vinho da marca */
   --brand-dark: #400c1b;  /* tom mais escuro para hover/foco */
-  --brass: #9C7B3F;       /* latão: acento (frações, filetes) */
+  --brass: #9C7B3F;       /* latão: acento (filetes, sublinhados) */
+  --brass-ink: #7A5E27;   /* latão escurecido para texto (contraste AA sobre branco) */
   --ink: #1F1A1B;         /* texto principal (preto quente) */
   --stone: #6B6360;       /* texto secundário */
   --surface: #FAFAF8;     /* fundo da página (neutro quase-branco) */
@@ -13,9 +14,22 @@
   --fonte-dados: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
+/* Rodapé sempre no pé da janela, mesmo com pouco conteúdo */
 body {
   background-color: var(--surface);
   color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+/* Borda dos cards num tom quente da marca, no lugar do cinza padrão */
+.card {
+  --bs-card-border-color: rgba(89, 17, 37, 0.10);
 }
 
 /* Títulos em Spectral */
@@ -48,6 +62,7 @@ h1, h2, h3, h4, h5, h6,
 .btn-brand {
   background-color: var(--brand);
   color: #fff;
+  white-space: nowrap; /* "Calcular" não quebra em duas linhas no mobile */
 }
 
 .btn-brand:hover,
@@ -63,10 +78,42 @@ h1, h2, h3, h4, h5, h6,
   box-shadow: none;
 }
 
+/* Anel de foco dos campos na cor da marca (substitui o azul padrão do Bootstrap) */
+.form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.25rem rgba(89, 17, 37, 0.12);
+}
+
+/* Alternador de operação (+/−) do cartão "Datas e dias" */
+.op-toggle .btn {
+  --bs-btn-color: var(--brand);
+  --bs-btn-border-color: var(--brand);
+  --bs-btn-hover-color: var(--brand);
+  --bs-btn-hover-bg: rgba(89, 17, 37, 0.08);
+  --bs-btn-hover-border-color: var(--brand);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--brand);
+  --bs-btn-active-border-color: var(--brand);
+  font-family: var(--fonte-dados);
+}
+
+.btn-check:focus-visible + .btn {
+  outline: 3px solid var(--brand-dark);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* Campos de data dividem o espaço e quebram linha em telas estreitas */
+.input-group > .form-floating {
+  flex: 1 1 9rem;
+  min-width: 0;
+}
+
 /* --- Assinatura: tabelas de frações e porcentagem --- */
-/* Faixas listradas num latão bem sutil */
+/* Faixas listradas num latão bem sutil; hover um pouco mais firme */
 #tfr, #tpc {
   --bs-table-striped-bg: rgba(156, 123, 63, .06);
+  --bs-table-hover-bg: rgba(156, 123, 63, .14);
 }
 
 /* Cabeçalho: rótulo na cor da marca, sublinhado em latão */
@@ -82,9 +129,9 @@ h1, h2, h3, h4, h5, h6,
   vertical-align: middle;
 }
 
-/* 1ª coluna (fração / porcentagem): destaque em latão */
+/* 1ª coluna (fração / porcentagem): destaque em latão legível */
 #tfr tbody td:first-child, #tpc tbody td:first-child {
-  color: var(--brass);
+  color: var(--brass-ink);
   font-weight: 500;
   font-size: 1.1rem;
 }
@@ -96,4 +143,9 @@ h1, h2, h3, h4, h5, h6,
 }
 #tfr tbody td:last-child, #tpc tbody td:last-child {
   color: var(--ink);
+}
+
+/* Estado vazio: travessão discreto até o primeiro cálculo */
+#tfr td.sem-valor, #tpc td.sem-valor {
+  color: var(--stone);
 }

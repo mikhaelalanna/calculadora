@@ -2,6 +2,14 @@
 const DIAS_POR_ANO = 365;
 const DIAS_POR_MES = 30;
 
+// Formata números no padrão brasileiro (1.825 e 912,5), com casas decimais opcionais
+function formatarNumero(valor, casasDecimais = 0) {
+  return valor.toLocaleString("pt-BR", {
+    minimumFractionDigits: casasDecimais,
+    maximumFractionDigits: casasDecimais,
+  });
+}
+
 // Lê um campo inteiro: vazio vira 0; texto inválido ou negativo retorna null (inválido)
 function lerCampoInteiro(id) {
   const valor = document.getElementById(id).value.trim();
@@ -31,7 +39,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
 
   if (anos === null || meses === null || dias === null) {
     // Exibir mensagem de erro
-    definirResultado("resultado", "Por favor, informe um valor válido.", "erro");
+    definirResultado("resultado", "Informe apenas números inteiros, sem sinal.", "erro");
     return;
   }
 
@@ -39,7 +47,7 @@ document.getElementById("calcularBtn").addEventListener("click", function() {
   const totalDias = (anos * DIAS_POR_ANO) + (meses * DIAS_POR_MES) + dias;
 
   // Exibir o resultado
-  definirResultado("resultado", `Isto equivale a ${totalDias} dias.`);
+  definirResultado("resultado", `Isto equivale a ${formatarNumero(totalDias)} dias.`);
 });
 
 
@@ -49,7 +57,7 @@ document.getElementById('calcularAnoBtn').addEventListener('click', function() {
 
   if (diasEntrada === null) {
     // Exibir mensagem de erro
-    definirResultado('resultadoAno', 'Por favor, informe um valor válido.', 'erro');
+    definirResultado('resultadoAno', 'Informe apenas números inteiros, sem sinal.', 'erro');
     return;
   }
 
@@ -116,50 +124,39 @@ document.getElementById("calcularFPBtn").addEventListener("click", function () {
     16, 20, 25, 30, 40, 50, 60, 70,
   ];
 
+  // Preenche uma célula de resultado, tirando o estilo de estado vazio (travessão)
+  function preencherCelula(celula, valor) {
+    celula.innerText = formatarNumero(valor, 1);
+    celula.classList.remove("sem-valor");
+  }
+
   // Atualizar tabela de frações
   const tabelaFracoes = document.querySelectorAll("#tfr tbody tr");
   fracoes.forEach((item, index) => {
-    const diasCalculados = (dias * item.valor).toFixed(1);
-    tabelaFracoes[index].children[1].innerText = diasCalculados;
+    preencherCelula(tabelaFracoes[index].children[1], dias * item.valor);
   });
 
   // Atualizar tabela de porcentagens
   const tabelaPorcentagens = document.querySelectorAll("#tpc tbody tr");
   porcentagens.forEach((percentual, index) => {
-    const diasCalculados = (dias * (percentual / 100)).toFixed(1);
-    tabelaPorcentagens[index].children[1].innerText = diasCalculados;
-  });
-});
-document.querySelectorAll("table tbody tr").forEach(row => {
-  // Quando o mouse passar por cima da linha
-  row.addEventListener("mouseover", () => {
-    row.classList.add("table-active"); // Classe Bootstrap para destacar a linha
-  });
-
-  // Quando o mouse sair da linha
-  row.addEventListener("mouseout", () => {
-    row.classList.remove("table-active");
+    preencherCelula(tabelaPorcentagens[index].children[1], dias * (percentual / 100));
   });
 });
 
-// Atualiza a operação selecionada no botão do dropdown
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.addEventListener('click', function () {
-    const selectedValue = this.getAttribute('data-value'); // Valor selecionado (+ ou -)
-    const dropdownButton = document.getElementById('operacaoDropdown');
-
-    dropdownButton.textContent = selectedValue;          // Texto visível
-    dropdownButton.dataset.operacao = selectedValue;     // Estado lógico lido no cálculo
-    dropdownButton.setAttribute('aria-label',
-      selectedValue === '+' ? 'Operação: adicionar dias' : 'Operação: subtrair dias');
+// Espelha o radio selecionado na classe .active do label (destaque visual do alternador)
+const radiosOperacao = document.querySelectorAll('input[name="operacao"]');
+function sincronizarOperacao() {
+  radiosOperacao.forEach(radio => {
+    document.querySelector(`label[for="${radio.id}"]`).classList.toggle("active", radio.checked);
   });
-});
+}
+radiosOperacao.forEach(radio => radio.addEventListener("change", sincronizarOperacao));
+sincronizarOperacao();
 
 // Função para calcular e exibir o resultado
 document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const dataInput = document.getElementById("dataOP");
   const diasInput = document.getElementById("diasOP");
-  const operacaoDropdown = document.getElementById("operacaoDropdown");
 
   // Obter a data do campo dataOP dividida em dia, mês e ano
   const [anoOP, mesOP, diaOP] = dataInput.value.split("-");
@@ -170,12 +167,12 @@ document.getElementById("calcularOPBtn").addEventListener("click", function() {
   const dias = parseInt(diasInput.value, 10);
 
   if (isNaN(dias) || dias <= 0 || isNaN(data)) {
-    definirResultado("resultadoOP", "Por favor, insira uma data válida e dias maiores que 0.", "erro");
+    definirResultado("resultadoOP", "Informe uma data e um número de dias maior que zero.", "erro");
     return;
   }
 
-  // Obter a operação selecionada (+ ou -)
-  const operacao = operacaoDropdown.dataset.operacao;
+  // Obter a operação selecionada no alternador (+ ou -)
+  const operacao = document.querySelector('input[name="operacao"]:checked').value;
 
   // Realizar a operação de adição ou subtração
   if (operacao === "+") {
@@ -215,10 +212,10 @@ document.getElementById("calcularDifBtn").addEventListener("click", function() {
     const diffDays = Math.floor(diffTime / (1000 * 3600 * 24));
 
     // Exibir o resultado
-    definirResultado("resultadoDif", `A diferença é de ${diffDays} dias.`);
+    definirResultado("resultadoDif", `A diferença é de ${formatarNumero(diffDays)} dias.`);
   } else {
     // Caso as datas não estejam preenchidas
-    definirResultado("resultadoDif", "Por favor, insira ambas as datas.", "erro");
+    definirResultado("resultadoDif", "Informe as duas datas.", "erro");
   }
 });
 

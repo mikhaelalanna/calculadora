@@ -35,7 +35,7 @@
     </nav>
 
     <!-- content -->
-    <div class="container-fluid mt-4">
+    <div class="container-fluid my-4">
       <h1 class="visually-hidden">Calculadora de Execução Penal</h1>
       <div class="row mb-3 g-4">
         <!-- Coluna 1: 40% -->
@@ -74,7 +74,7 @@
             </button>
           </div>
 
-          <h2 class="h3 mt-5">Conversão em anos</h2>
+          <h2 class="h3 mt-5">Conversão para anos</h2>
           <div class="mb-3 form-floating">
             <input type="number" class="form-control" id="diasParaAno" placeholder="Dias" min="0">
             <label for="diasParaAno">Dias</label>
@@ -97,7 +97,7 @@
         <div class="col-12 col-md-7">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
-          <h2 class="h3">Frações e Porcentagem</h2>
+          <h2 class="h3">Frações e porcentagens</h2>
 
           <div class="row mb-3">
             <div class="col-12">
@@ -116,101 +116,101 @@
           <!-- Tabelas lado a lado -->
           <div class="row">
             <div class="col-12 col-md-6">
-              <table id="tfr" class="table table-striped">
+              <table id="tfr" class="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Fração</th>
-                    <th scope="col">Número de Dias</th>
+                    <th scope="col">Dias</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>1/6</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>1/5</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>1/4</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>1/3</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>3/8</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>2/5</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>5/12</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>11/24</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>1/2</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>3/5</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>2/3</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="col-12 col-md-6">
-              <table id="tpc" class="table table-striped">
+              <table id="tpc" class="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Porcentagem</th>
-                    <th scope="col">Número de Dias</th>
+                    <th scope="col">Dias</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>16%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>20%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>25%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>30%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>40%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>50%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>60%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                   <tr>
                     <td>70%</td>
-                    <td>0</td>
+                    <td class="sem-valor">&mdash;</td>
                   </tr>
                 </tbody>
               </table>
@@ -237,15 +237,12 @@
                   <label for="dataOP">Data</label>
                 </div>
 
-                <!-- Dropdown com + e - -->
-                <div class="dropdown">
-                  <button class="btn btn-brand dropdown-toggle fs-4" type="button" id="operacaoDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-operacao="+" aria-label="Operação: adicionar dias">
-                    +
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="operacaoDropdown">
-                    <li><button type="button" class="dropdown-item fs-4" data-value="+">+</button></li>
-                    <li><button type="button" class="dropdown-item fs-4" data-value="-">-</button></li>
-                  </ul>
+                <!-- Alternador de operação: somar ou subtrair dias -->
+                <div class="btn-group op-toggle" role="group" aria-label="Operação">
+                  <input type="radio" class="btn-check" name="operacao" id="opSomar" value="+" checked>
+                  <label class="btn fs-4" for="opSomar" title="Somar dias à data">+</label>
+                  <input type="radio" class="btn-check" name="operacao" id="opSubtrair" value="-">
+                  <label class="btn fs-4" for="opSubtrair" title="Subtrair dias da data">&minus;</label>
                 </div>
 
                 <!-- Campo de dias -->
@@ -325,11 +322,10 @@
 
     </div> <!-- fecha content -->
 
-    <footer class="text-white text-center p-3 mt-3 footer bg-brand">
+    <footer class="text-white text-center p-3 footer bg-brand">
       <p>&copy; 2025&ndash;2026 Mikhaela Lanna. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="assets/calculadora.js"></script>
   </body>
 </html>
